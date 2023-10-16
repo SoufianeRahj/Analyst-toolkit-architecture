@@ -12,7 +12,7 @@ For infrastructure cost reasons I don't keep the application UP 24/7.
 
 To explain the previous infrastructure let's consider separately the Front End and Back End Applications.
 
-### Infrastructure of the Front End
+## Architecture of the Front End
 The Front End application is a React app. S3 hosts the build of the source Code. 
 
 A cloudfront Distribution is created with the S3 bucket as an origin (not S3 for static website hosting). The default behavior is the S3 Bucket. There will be 2 behaviors linked to 2 buckets afterwards to allow blue/green deployments.
@@ -21,7 +21,7 @@ ACM is used to generate TLS certificates on US-EAST-1 for the cloudfront distrib
 
 An alias record is created on route53 to point to the cloudfront distribution.
 
-### Infrastructure of the Back End
+## Architecture of the Back End
 
 The Application Load Balancer is associated with 2 AZs. 
 
@@ -37,7 +37,7 @@ The Back End is a Node.js application. PM2 is used as a process manager to take 
 
 Sensitive data (api keys) are stored on SSM parameter store as secrets and requested from the instances in order to be passed to PM2 as environment variables. This allow child processes to be able to fetch the required secrets.
 
-### Security
+## Security
 
 SSM Parameter store is used to store secrets. 
 
@@ -49,9 +49,9 @@ A security group is created for EC2 instances allowing traffic from the Security
 
 No SSH port open on the EC2 instances. All access is done through AWS Session Manager.
 
-### Continuous delivery of the Front End
+## Continuous delivery of the Front End
 
-### Continuous delivery of the Back End
+## Continuous delivery of the Back End
 
 An S3 bucket is created to contain the artifcat that will be deployed on the EC2 instances. The S3 bucket must be in the same region as the EC2 instances (eu-west-3 in this case).
 
