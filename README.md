@@ -5,7 +5,7 @@ It helps delivering high quality specifications by removing typos, enhancing the
 
 [WORK IN PROGRESS]: the translation and typos removal features are available as of now. To test the application, email me at soufianerahj23@gmail.com. 
 
-For infrastructure cost reasons I don't keep the application UP 24/24.
+For infrastructure cost reasons I don't keep the application UP 24/7.
 
 ## Architecture of the Infrastructure of the Analyst-toolkit application
 ![Architecture of the infrastructure](diagrams/analyst-toolkit.drawio.png)
