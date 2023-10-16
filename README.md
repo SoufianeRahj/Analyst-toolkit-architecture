@@ -8,7 +8,7 @@ It helps delivering high quality specifications by removing typos, enhancing the
 For infrastructure cost reasons I don't keep the application UP 24/7.
 
 ## Architecture of the Infrastructure of the Analyst-toolkit application
-![Architecture of the infrastructure](diagrams/analyst-toolkit.drawio.png)
+![Architecture of the infrastructure](diagrams/analyst-toolkit-architecture.png)
 
 To explain the previous infrastructure let's consider separately the Front End and Back End Applications.
 
