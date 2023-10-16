@@ -69,7 +69,7 @@ Create app on code deploy, and create a deployment group
 
 The root of the application revision must contain : 
 - appspec.yml
-- scripts
+- scripts (stop_application.sh, before_install.sh, after_install.sh, start_server.sh)
 The revision code + above files are zipped and stored on the S3 bucket.
 
 All scripts must have appropriate execution permission. Ie, it is a bad practice to run the app entry point with root privileges for security reasons.
