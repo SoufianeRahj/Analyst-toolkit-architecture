@@ -9,3 +9,17 @@ For infrastructure cost reasons I don't keep the application UP 24/24.
 
 ## Architecture of the Infrastructure of the Analyst-toolkit application
 ![Architecture of the infrastructure](diagrams/analyst-toolkit.drawio.png)
+
+To explain the previous infrastructure let's consider separately the Front End and Back End Applications.
+
+### Infrastructure of the Front End
+
+### Infrastructure of the Back End
+
+### Continuous delivery of the Front End
+
+### Continuous delivery of the Back End
+
+### IAC 
+
+### Monitoring and Logging
