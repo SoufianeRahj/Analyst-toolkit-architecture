@@ -40,11 +40,36 @@ Sensitive data (api keys) are stored on SSM parameter store as secrets and reque
 ### Security
 
 SSM Parameter store is used to store secrets. 
+
 A TLS certificate is associated to the ALB to allow https protocol.
+
 A security group is created for the ALB allowing https traffic from anywhere.
+
 A security group is created for EC2 instances allowing traffic from the Security group of the ALB.
+
+No SSH port open on the EC2 instances. All access is done through AWS Session Manager.
 
 ### Continuous delivery of the Front End
 
 ### Continuous delivery of the Back End
 
+An S3 bucket is created to contain the artifcat that will be deployed on the EC2 instances. The S3 bucket must be in the same region as the EC2 instances (eu-west-3 in this case).
+
+AWS CodeDeploy is used to deploy this artifact into the EC2 instances. 
+
+The following IAM permissions are required in order to allow Code Deploy to interact with the EC2 instances.
+- Create a role for codeDeploy with the managed policy AWSCodeDeployRole
+- The EC2 instances role must allow access the S3 bucket containing the revision code. 
+
+Install the codedeploy agent on the EC2 instances. This is be done with AWS SSM Distributor that helps installing the relevant package on SSM managed EC2 instances.
+
+The EC2 instances are tagged as well with the APP name and the ENV name to distinguish the EC2 instances at the deployment time.
+
+Create app on code deploy, and create a deployment group
+
+The root of the application revision must contain : 
+- appspec.yml
+- scripts
+The revision code + above files are zipped and stored on the S3 bucket.
+
+All scripts must have appropriate execution permission. Ie, it is a bad practice to run the app entry point with root privileges for security reasons.
