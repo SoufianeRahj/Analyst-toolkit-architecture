@@ -37,7 +37,7 @@ The Back End is a Node.js application. PM2 is used as a process manager to take 
 
 Sensitive data (api keys) are stored on SSM parameter store as secrets and requested from the instances in order to be passed to PM2 as environment variables. This allow child processes to be able to fetch the required secrets.
 
-## Security
+## Security of the architecture
 
 SSM Parameter store is used to store secrets. 
 
@@ -49,11 +49,17 @@ A security group is created for EC2 instances allowing traffic from the Security
 
 No SSH port open on the EC2 instances. All access is done through AWS Session Manager.
 
+HTTPs is supported on the cloudfront distribution for the viewer request.
+
+An OAC is associated to the cloudfront distribution and the S3 bucket containing the build of the react app is private. Only the OAC can access the S3 bucket (set through S3 bucket policy)
+
 ## Continuous delivery of the Front End
 
 ## Continuous delivery of the Back End
 
-An S3 bucket is created to contain the artifcat that will be deployed on the EC2 instances. The S3 bucket must be in the same region as the EC2 instances (eu-west-3 in this case).
+![CD BE](diagrams/CD-EC2.png)
+
+An S3 bucket is created to contain the artifact that will be deployed on the EC2 instances. The S3 bucket must be in the same region as the EC2 instances (eu-west-3 in this case).
 
 AWS CodeDeploy is used to deploy this artifact into the EC2 instances. 
 
