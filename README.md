@@ -55,6 +55,30 @@ An OAC is associated to the cloudfront distribution and the S3 bucket containing
 
 ## Continuous delivery of the Front End
 
+![CD FE](diagrams/CD-Cloudfront-blue-green.png)
+
+A blue/green deployment strategy is chosen in this case because : 
+- The rollback mechanism is robust (switch between 2 environments in case there is an issue)
+- The cost of having 2 infrasctructures in this case 2 S3 buckets is very low in comparison to other blue/green deployments that require 2 expensive compute environments to be UP.
+
+### Setup of the blue/green deployment
+
+The cloudfront Distribution has one default behavior. 
+
+The blue bucket is the origin linked to the default behavior. 
+
+The default behavior is updated to point at the green bucket. Now the blue bucket becomes the green bucket and the green bucket becomes the blue bucket for the next deployment.
+
+The cache of the cloudfront distribution is also invalidated after the operation. The following command is useful to do so : 
+```
+aws cloudfront create-invalidation --distribution-id <YOUR_DISTRIBUTION_ID> --paths <path>
+```
+
+Another useful commade to sync the build of the code with the S3 bucket : 
+
+```
+aws s3 sync build/ s3://your-bucket-name/ --delete 
+```
 ## Continuous delivery of the Back End
 
 ![CD BE](diagrams/CD-EC2.png)
